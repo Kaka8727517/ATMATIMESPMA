@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management - Diagnostic Tests & Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnostic Tests & Results</h1>
+        <form id="diagnosticTestForm">
+            <label for="testName">Test Name:</label>
+            <input type="text" id="testName" name="testName" required placeholder="e.g., Blood Test, MRI, ECG">
+
+            <label for="testDate">Test Date:</label>
+            <input type="date" id="testDate" name="testDate" required>
+
+            <label for="testResults">Test Results:</label>
+            <textarea id="testResults" name="testResults" rows="4" required></textarea>
+
+            <label for="labName">Laboratory/Diagnostic Center Name:</label>
+            <input type="text" id="labName" name="labName" required>
+
+            <label for="reportUpload">Report Upload:</label>
+            <input type="file" id="reportUpload" name="reportUpload" accept=".pdf,.doc,.docx,.jpg,.png">
+
+            <label for="followUpRecommendations">Follow-up Recommendations:</label>
+            <textarea id="followUpRecommendations" name="followUpRecommendations" rows="4" placeholder="Based on test results"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Handle file upload
+            const fileInput = document.getElementById('reportUpload');
+            if (fileInput.files.length > 0) {
+                formData.append('reportFile', fileInput.files[0]);
+            }
+
+            // Convert FormData to object, excluding the file
+            const data = Object.fromEntries(Array.from(formData.entries()).filter(([key]) => key !== 'reportFile'));
+
+            // TODO: Implement Google Sheets API integration
+            console.log('Form data:', data);
+            console.log('File:', fileInput.files[0]);
+            alert('Diagnostic test information submitted successfully!');
+
+            // Redirect to the next page (Treatment Plan)
+            window.location.href = 'treatment-plan.html';
+        }
+
+        document.getElementById('diagnosticTestForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>

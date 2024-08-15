@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management - Billing & Payments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Billing & Payments</h1>
+        <form id="billingPaymentForm">
+            <label for="consultationFees">Consultation Fees:</label>
+            <input type="number" id="consultationFees" name="consultationFees" step="0.01" required>
+
+            <label for="testCosts">Test Costs:</label>
+            <input type="number" id="testCosts" name="testCosts" step="0.01">
+
+            <label for="medicationCosts">Medication Costs:</label>
+            <input type="number" id="medicationCosts" name="medicationCosts" step="0.01">
+
+            <label for="insuranceClaims">Insurance Claims:</label>
+            <select id="insuranceClaims" name="insuranceClaims">
+                <option value="">Select Status</option>
+                <option value="filed">Filed</option>
+                <option value="processed">Processed</option>
+                <option value="notFiled">Not Filed</option>
+            </select>
+
+            <label for="outstandingBalance">Outstanding Balance:</label>
+            <input type="number" id="outstandingBalance" name="outstandingBalance" step="0.01" required>
+
+            <label for="paymentMethods">Payment Methods:</label>
+            <select id="paymentMethods" name="paymentMethods" multiple>
+                <option value="cash">Cash</option>
+                <option value="creditCard">Credit Card</option>
+                <option value="debitCard">Debit Card</option>
+                <option value="bankTransfer">Bank Transfer</option>
+                <option value="insurance">Insurance</option>
+            </select>
+
+            <label for="paymentHistory">Payment History:</label>
+            <textarea id="paymentHistory" name="paymentHistory" rows="4"></textarea>
+
+            <label for="billingCodes">Billing Codes:</label>
+            <input type="text" id="billingCodes" name="billingCodes" placeholder="For Insurance">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Handle multiple select for payment methods
+            const paymentMethods = Array.from(form.paymentMethods.selectedOptions).map(option => option.value);
+            formData.set('paymentMethods', paymentMethods.join(', '));
+
+            const data = Object.fromEntries(formData.entries());
+
+            // TODO: Implement Google Sheets API integration
+            console.log('Form data:', data);
+            alert('Billing & Payment information submitted successfully!');
+
+            // Redirect to the next page (Communication & Notifications)
+            window.location.href = 'communication-notifications.html';
+        }
+
+        document.getElementById('billingPaymentForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>

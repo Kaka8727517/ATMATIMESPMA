@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management - Appointment Scheduling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Appointment Scheduling</h1>
+        <form id="appointmentForm">
+            <label for="appointmentDate">Date of Appointment:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+            <label for="appointmentTime">Time of Appointment:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+            <label for="consultingPhysician">Consulting Physician:</label>
+            <input type="text" id="consultingPhysician" name="consultingPhysician" required>
+
+            <label for="appointmentType">Appointment Type:</label>
+            <select id="appointmentType" name="appointmentType" required>
+                <option value="">Select Appointment Type</option>
+                <option value="initial">Initial Consultation</option>
+                <option value="followUp">Follow-up</option>
+                <option value="emergency">Emergency Visit</option>
+            </select>
+
+            <label for="reasonForVisit">Reason for Visit:</label>
+            <textarea id="reasonForVisit" name="reasonForVisit" rows="4" required></textarea>
+
+            <label for="consultationMode">Preferred Mode of Consultation:</label>
+            <select id="consultationMode" name="consultationMode" required>
+                <option value="">Select Consultation Mode</option>
+                <option value="inPerson">In-person</option>
+                <option value="telemedicine">Telemedicine</option>
+            </select>
+
+            <label for="appointmentStatus">Appointment Status:</label>
+            <select id="appointmentStatus" name="appointmentStatus" required>
+                <option value="">Select Appointment Status</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="completed">Completed</option>
+                <option value="canceled">Canceled</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // TODO: Implement Google Sheets API integration
+            console.log('Form data:', data);
+            alert('Appointment scheduled successfully!');
+
+            // Redirect to the next page (Diagnostic Tests & Results)
+            window.location.href = 'diagnostic-tests.html';
+        }
+
+        document.getElementById('appointmentForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>

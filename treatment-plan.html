@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management - Treatment Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Treatment Plan</h1>
+        <form id="treatmentPlanForm">
+            <label for="currentMedications">Current Medications:</label>
+            <textarea id="currentMedications" name="currentMedications" rows="4" placeholder="Name, Dosage, Frequency" required></textarea>
+
+            <label for="pastMedications">Past Medications:</label>
+            <textarea id="pastMedications" name="pastMedications" rows="4"></textarea>
+
+            <label for="lifestyleRecommendations">Lifestyle Recommendations:</label>
+            <textarea id="lifestyleRecommendations" name="lifestyleRecommendations" rows="4" placeholder="e.g., diet, exercise"></textarea>
+
+            <label for="referralInformation">Referral Information:</label>
+            <textarea id="referralInformation" name="referralInformation" rows="4" placeholder="e.g., to specialists like endocrinologists or cardiologists"></textarea>
+
+            <label for="nextReviewDate">Next Review Date:</label>
+            <input type="date" id="nextReviewDate" name="nextReviewDate" required>
+
+            <label for="medicationSideEffects">Medication Side Effects Monitoring:</label>
+            <textarea id="medicationSideEffects" name="medicationSideEffects" rows="4"></textarea>
+
+            <label for="adherenceCheckpoints">Adherence Checkpoints:</label>
+            <textarea id="adherenceCheckpoints" name="adherenceCheckpoints" rows="4"></textarea>
+
+            <label for="patientEducationNotes">Patient Education Notes:</label>
+            <textarea id="patientEducationNotes" name="patientEducationNotes" rows="4" placeholder="Advice provided, informational materials"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // TODO: Implement Google Sheets API integration
+            console.log('Form data:', data);
+            alert('Treatment plan submitted successfully!');
+
+            // Redirect to the next page (Billing & Payments)
+            window.location.href = 'billing-payments.html';
+        }
+
+        document.getElementById('treatmentPlanForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management - NCD-Specific Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NCD-Specific Monitoring</h1>
+        <form id="ncdMonitoringForm">
+            <label for="bloodPressure">Blood Pressure Readings:</label>
+            <input type="text" id="bloodPressure" name="bloodPressure" placeholder="e.g., 120/80 mmHg">
+
+            <label for="bloodSugar">Blood Sugar Levels:</label>
+            <input type="text" id="bloodSugar" name="bloodSugar" placeholder="Fasting, Postprandial, HbA1c">
+
+            <label for="cholesterol">Cholesterol Levels:</label>
+            <input type="text" id="cholesterol" name="cholesterol" placeholder="HDL, LDL, Total Cholesterol">
+
+            <label for="bmi">Body Mass Index (BMI):</label>
+            <input type="number" id="bmi" name="bmi" step="0.1">
+
+            <label for="heartRate">Heart Rate:</label>
+            <input type="number" id="heartRate" name="heartRate">
+
+            <label for="lungFunction">Lung Function:</label>
+            <input type="text" id="lungFunction" name="lungFunction">
+
+            <label for="renalFunction">Renal Function:</label>
+            <input type="text" id="renalFunction" name="renalFunction" placeholder="eGFR, Creatinine levels">
+
+            <label for="medications">Medications Prescribed:</label>
+            <textarea id="medications" name="medications" rows="4" placeholder="Medication, Dose, Frequency"></textarea>
+
+            <label for="medicationAdherence">Medication Adherence:</label>
+            <select id="medicationAdherence" name="medicationAdherence">
+                <option value="">Select Adherence Level</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <label for="dietaryMonitoring">Dietary Monitoring:</label>
+            <textarea id="dietaryMonitoring" name="dietaryMonitoring" rows="4" placeholder="e.g., tracking salt, sugar intake"></textarea>
+
+            <label for="exerciseTracking">Exercise/Activity Tracking:</label>
+            <textarea id="exerciseTracking" name="exerciseTracking" rows="4"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // TODO: Implement Google Sheets API integration
+            console.log('Form data:', data);
+            alert('NCD-Specific Monitoring data submitted successfully!');
+
+            // Redirect to the next page (Appointment Scheduling)
+            window.location.href = 'appointment-scheduling.html';
+        }
+
+        document.getElementById('ncdMonitoringForm').addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>
